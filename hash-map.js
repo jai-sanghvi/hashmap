@@ -169,8 +169,12 @@ export class HashMap {
   manageLoad() {
     const isOverLoaded = ( (this.length() / this.capacity) > this.loadFactor) ? true : false;
     if (isOverLoaded) {
+      const entries = this.entries();
       this.capacity = this.capacity * 2;
-      this.table.length = this.capacity;
+      this.table = new Array(this.capacity);
+      for (let entry of entries) {
+        this.set(entry[0], entry[1]);
+      }
     } 
   }
  
